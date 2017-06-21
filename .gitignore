@@ -1,0 +1,5 @@
+*.codekit
+*.sublime-project
+*.sublime-workspace
+**/.sass-cache
+**/.DS_Store
