@@ -19,6 +19,10 @@ var musicArray = [];
 // Control Bindings
 //
 
+// Toggle Control Panel
+const controlToggle = document.getElementById("controls_toggle");
+const controlPanel = document.getElementById("controls-wrapper");
+
 // Ranges
 const videoSpeedControl = document.getElementById("video_speed");
 const imageSpeedControl = document.getElementById("photo_speed");
@@ -37,6 +41,10 @@ var videoSpeed = 1;
 var imageSpeed = 8000;
 
 // Listeners
+controlToggle.addEventListener("click", function(){
+  controlPanel.classList.toggle('visible');
+});
+
 videoSpeedControl.addEventListener("input", function(){
   videoSpeed = videoSpeedControl.value / 50;
 });

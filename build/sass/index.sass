@@ -21,6 +21,20 @@ body
 canvas
 	//border: 2px solid red
 
+#controls_toggle
+	position: fixed
+	top: 30px
+	right: 30px
+	color: white
+	font-family: Helvetica
+	font-weight: 300
+	letter-spacing: 0.2px
+	cursor: pointer
+	z-index: 10
+	&:hover
+		color: blue
+
+
 #controls-wrapper
 	z-index: 2
 	position: fixed
@@ -34,6 +48,11 @@ canvas
 	flex-direction: column
 	justify-content: space-around
 	padding: 40px 30px
+	transform: translateX(40vw)
+	transition: transform 0.3s ease-in-out
+
+#controls-wrapper.visible
+	transform: translateX(0)
 
 .controls 
 	display: flex
