@@ -9,4 +9,16 @@
 <meta name="twitter:image" content="">
 <meta name="twitter:site" content="">
 <meta name="twitter:creator" content="">
-<meta name="theme-color" content=""></head><body><div id="canvas-wrapper"><canvas id="canvas"></canvas></div><div class="text-wrapper"></div><audio id="c-audio-player"></audio><video id="video" style="display: none;"></video><script src="assets/js/min/index-min.js"></script></body></html>
+<meta name="theme-color" content=""></head><body><div id="canvas-wrapper"><canvas id="canvas"></canvas></div><div id="text-wrapper"></div><div id="controls-wrapper"><div id="visual-controls" class="controls"><h2>Visual Controls</h2><div class="control__input checkbox"><input type="checkbox" id="video_toggle" name="videoToggle" value="videoToggle"/><label for="video_toggle">Video</label></div><div class="control__input checkbox"><input type="checkbox" id="photo_toggle" name="photoToggle" value="photoToggle"/><label for="photo_toggle">Photos</label></div><div class="control__input"><input type="range" id="video_speed" name="videoSpeed" list="video_tickmarks"/><label for="video_speed">Video Playback Rate</label><datalist id="tickmarks">
+<option value="0" label="0%">
+<option value="10">
+<option value="20">
+<option value="30">
+<option value="40">
+<option value="50" label="100%">
+<option value="60">
+<option value="70">
+<option value="80">
+<option value="90">
+<option value="100" label="200%">
+</datalist></div><div class="control__input"><input type="range" id="photo_speed" class="reversed_input"/><label for="photo_speed">Photo Refresh Rate</label></div></div><div id="audio-controls" class="controls"><h2>Audio Controls</h2><div class="control__input checkbox"><input type="checkbox" id="music_toggle"/><label for="music_toggle">Music</label></div><div class="control__input"><input type="range" id="music_volume" min="0" max="0.5" step="0.05"/><label for="music_volume">Music Volume</label></div><div class="control__input checkbox"><input type="checkbox" id="ambience_toggle"/><label for="ambience_toggle">Ambience</label></div><div class="control__input"><input type="range" id="ambience_volume" min="0" max="1" step="0.1"/><label for="ambience_volume">Ambience Volume</label></div></div><div id="text-controls" class="controls"><h2>Text Controls</h2><div class="control__input checkbox"><input type="checkbox" id="text_toggle"/><label for="text_toggle">Text</label></div></div></div><audio id="c-audio-player"></audio><audio id="c-music-player"></audio><video id="video" style="display: none;"></video><script src="assets/js/min/index-min.js"></script></body></html>

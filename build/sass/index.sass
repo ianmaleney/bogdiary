@@ -16,6 +16,62 @@ body
 	left: 0
 	display: flex
 	align-items: center
+	pointer-events: none
 
 canvas
 	//border: 2px solid red
+
+#controls-wrapper
+	z-index: 2
+	position: fixed
+	top: 0
+	right: 0
+	width: 40vw
+	height: 100vh
+	background-color: rgba(0,0,0,0.4)
+	color: white
+	display: flex
+	flex-direction: column
+	justify-content: space-around
+	padding: 40px 30px
+
+.controls 
+	display: flex
+	flex-direction: column
+	justify-content: space-around
+	font-family: Helvetica
+	letter-spacing: 0.3px
+	font-weight: 300
+	border-bottom: 1px solid white
+	padding: 20px 0
+	input, label
+		margin: 10px 10px
+	.reversed_input
+		direction: rtl
+	
+
+.checkbox
+	input, label
+		&:hover
+			cursor: pointer
+	input[type="checkbox"]
+		opacity: 0
+	label::before
+		content: ""
+		display: inline-block
+		height: 16px
+		width: 16px
+		border: 1px solid
+		position: relative
+		top: 0
+		left: -15px
+
+.checkbox input[type="checkbox"]:checked + label::before
+	background-color: white
+
+.checkbox input[type="checkbox"]:focus + label::before 
+	outline: rgb(59, 153, 252) auto 5px
+
+
+input
+	z-index: 5
