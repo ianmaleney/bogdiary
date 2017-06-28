@@ -1,3 +1,23 @@
+const textStatic = [
+  "Spring comes late to the bog.", 
+  "Long into April it slumbers, pale and unpeopled.", 
+  "The grass overgrown in long tussocks, white as chalk, crunching underfoot like snow.", 
+  "The heather is subdued, almost black, a deep, quiet indigo resting in clusters.", 
+  "Along the bank the hard stalks of winter grass lie flat, a frosty blue, subtle but shocking in this field, the frozen aftermath of some ancient massacre glinting in the low April sun.",
+  "Further towards the western edge burgundy thorns lie across the silver barbed wire fence, one sharp as the other.", 
+  "Beneath them both, the drain, soft and slow.", 
+  "On the far side, the exposed roots of the tall, thin trees with few branches and but a little crown of dark green leaves shivering in the breeze.", 
+  "The roots are caught a muddy red in the late light, like desert sand, like nothing you could believe to be alive.",
+  "The roots are out, sunk into the stream and the saturated dirt.", 
+  "Out in the next crop the birds are gathering and once in a while a pair of wings breaks cover and wheels around the open space, a lap of joyful energy, loud and free against an empty evening sky.", 
+  "I cast a long shadow and feel uselessly apologetic for every brutish step causing untold harm.", 
+  "Along the road the sun hangs inches above eye-level and my vision flickers golden in split-second intervals as it streams through the trees.", 
+  "My steps are hushed here by encircling branches and all around my head the birds, the birds, the birds."
+  ];
+
+var textArray = [];
+textArray = textArray.concat(textStatic);
+
 // Canvas Bindings
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
@@ -15,6 +35,9 @@ const music = document.getElementById('c-music-player');
 var audioArray = [];
 var musicArray = [];
 
+// Text Bindings
+const text = document.getElementById('text-container');
+
 //
 // Control Bindings
 //
@@ -22,6 +45,11 @@ var musicArray = [];
 // Toggle Control Panel
 const controlToggle = document.getElementById("controls_toggle");
 const controlPanel = document.getElementById("controls-wrapper");
+const opening = document.getElementById('open');
+const beginButton = document.getElementById('begin');
+const info = document.getElementById('info');
+const infoButton = document.getElementById('info-button');
+const infoClose = document.getElementById('info-close');
 
 // Ranges
 const videoSpeedControl = document.getElementById("video_speed");
@@ -77,10 +105,8 @@ musicToggle.addEventListener("change", function(){
       musicSet();
       musicPlay();
     }
-    console.log("Music Toggle Checked");
   } else {
     music.pause();
-    console.log("Music Toggle Unchecked");
   }
 });
 
@@ -100,10 +126,81 @@ ambienceToggle.addEventListener("change", function(){
 textToggle.addEventListener("change", function(){
   if (this.checked) {
     textWrap.classList.add('visible');
+    textPick();
   } else {
     textWrap.classList.remove('visible');
   }
 });
+
+beginButton.addEventListener("click", function() {
+  opening.classList.remove("visible");
+  videoToggle.checked = true;
+  photoToggle.checked = true;
+  ambienceToggle.checked = true;
+  flip();
+});
+
+infoButton.addEventListener("click", function() {
+  info.classList.toggle("visible");
+});
+
+infoClose.addEventListener("click", function() {
+  info.classList.remove("visible");
+});
+
+//
+// Text Functions
+//
+
+var pos = function(el, con){
+  var elh = el.getBoundingClientRect().height;
+  var elw = el.getBoundingClientRect().width;
+  var ch = con.getBoundingClientRect().height;
+  var cw = con.getBoundingClientRect().width;
+
+  var spaceH = ch - elh;
+  var spaceW = cw - elw;
+
+  var top = Math.floor(Math.random() * spaceH);
+  var left = Math.floor(Math.random() * spaceW);
+
+  if (top > ch / 2) {
+    top = top - 80;
+  }
+
+  if (left > cw / 2) {
+    left = left - 40;
+  }
+
+  el.style.top = top + "px";
+
+  if (cw > 960){
+    el.style.left = left + "px";
+  } else {
+    el.style.left = "20px";
+  }
+};
+
+var textPick = function() {
+  var rnd = Math.floor(Math.random() * textArray.length - 1) + 1;
+  var coin = null;
+  coin = Math.floor(Math.random() * 2);
+    if (coin === 0) {
+      textWrap.style.top = 
+      text.innerHTML = textArray[rnd];
+      pos(text, textWrap);
+      setTimeout(textPick, 12000);
+      if (textArray.length > 1) {
+        textArray.splice(rnd, 1);
+      } else {
+        textArray = textArray.concat(textStatic);
+      }
+    } else {
+      text.innerHTML = "";
+      setTimeout(textPick, 8000);
+    }
+  
+};
 
 //
 // Audio Functions
@@ -131,7 +228,6 @@ var audioPlay = function() {
   audio.volume = 1;
   audio.play();
   audio.addEventListener("ended", audioPlay);
-  console.log("Audio Playing: " + audio.src);
 };
 
 //
@@ -159,7 +255,6 @@ var musicPlay = function() {
   musicPick();
   music.play();
   music.addEventListener("ended", musicPlay);
-  console.log("Music Playing: " + music.src);
 };
 
 //
@@ -190,7 +285,6 @@ var draw = function() {
     canvas.width = dw;
     canvas.height = ih;
     ctx.drawImage(this, 0, 0, dw, ih);
-    console.log("Image on screen = " + this.src);
   });
   
 };
@@ -209,7 +303,6 @@ var videoSet = function(){
 var videoPick = function() {
   var rnd = Math.floor(Math.random() * videoArray.length - 1) + 1;
   v.src = videoArray[rnd];
-  console.log("Video Playing: " + v.src);
   if (videoArray.length > 0) {
     videoArray.splice(rnd, 1);
   } else {
@@ -245,7 +338,6 @@ var flip = function() {
   window.cancelAnimationFrame(globalID);
   v.pause();
   ctx.clearRect(0,0,1000,1000);
-  console.log("Clear!");
   
   if (videoToggle.checked && photoToggle.checked){
     // Reset Coin
@@ -289,7 +381,9 @@ document.addEventListener("DOMContentLoaded", function(){
     audioSet();
     audioPlay();
   }
-  
-  flip();
+
+  if (textToggle.checked){
+    textPick();
+  }
 
 });
