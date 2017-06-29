@@ -19,11 +19,11 @@ var textArray = [];
 textArray = textArray.concat(textStatic);
 
 // Canvas Bindings
-const canvas = document.getElementById('canvas');
+var canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const wrap = document.getElementById('canvas-wrapper');
 const v = document.getElementById('video');
-const img = document.createElement('img');
+var img = document.createElement('img');
 const textWrap = document.getElementById("text-wrapper");
 var videoArray = [];
 var imageArray = [];
@@ -47,7 +47,7 @@ const controlToggle = document.getElementById("controls_toggle");
 const controlPanel = document.getElementById("controls-wrapper");
 const opening = document.getElementById('open');
 const beginButton = document.getElementById('begin');
-const info = document.getElementById('info');
+const infoSplash = document.getElementById('info');
 const infoButton = document.getElementById('info-button');
 const infoClose = document.getElementById('info-close');
 
@@ -141,11 +141,11 @@ beginButton.addEventListener("click", function() {
 });
 
 infoButton.addEventListener("click", function() {
-  info.classList.toggle("visible");
+  infoSplash.classList.toggle("visible");
 });
 
 infoClose.addEventListener("click", function() {
-  info.classList.remove("visible");
+  infoSplash.classList.remove("visible");
 });
 
 //
